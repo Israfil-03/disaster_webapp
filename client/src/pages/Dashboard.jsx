@@ -23,6 +23,7 @@ const Dashboard = () => {
       case 'volunteers': return <VolunteersView />;
       case 'education': return <EducationView />;
       case 'donate': return <DonateView />;
+      case 'admin': return <AdminView />;
       default: return <DashboardView setActiveTab={setActiveTab} />;
     }
   };
@@ -69,6 +70,18 @@ const Dashboard = () => {
                   </button>
                 );
               })}
+              {user?.role === 'admin' && (
+                <button
+                  onClick={() => setActiveTab('admin')}
+                  className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors duration-200 ${
+                    activeTab === 'admin'
+                      ? 'border-brand text-brand' 
+                      : 'border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-600'
+                  }`}
+                >
+                  Admin
+                </button>
+              )}
             </nav>
           </div>
         </div>
@@ -91,5 +104,6 @@ import ResourcesView from '../components/views/ResourcesView';
 import VolunteersView from '../components/views/VolunteersView';
 import EducationView from '../components/views/EducationView';
 import DonateView from '../components/views/DonateView';
+import AdminView from '../components/views/AdminView';
 
 export default Dashboard;
