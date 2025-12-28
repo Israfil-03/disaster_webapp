@@ -57,18 +57,7 @@ const Signup = () => {
               value={formData.password} onChange={e => setFormData({...formData, password: e.target.value})}
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-slate-400 mb-1">Role</label>
-            <select 
-              className="w-full bg-dark border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-brand transition text-white"
-              value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})}
-            >
-              <option value="citizen">Citizen</option>
-              <option value="authority">Local Authority</option>
-              <option value="ndrf">NDRF / Emergency</option>
-              <option value="ngo">NGO / Volunteer</option>
-            </select>
-          </div>
+          {/* Role selection removed - Defaults to Citizen */}
           <button type="submit" className="w-full bg-brand hover:bg-sky-600 text-white py-2 rounded-lg font-semibold transition mt-2">
             Sign Up
           </button>

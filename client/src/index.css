@@ -3,12 +3,29 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
 }
 
 body {
-  @apply bg-darker text-slate-200;
+  @apply bg-darker text-slate-200 antialiased;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Custom scrollbar for webkit */
@@ -31,4 +48,12 @@ body {
   height: 100%;
   width: 100%;
   z-index: 10;
+}
+
+/* Custom Popup Styles for Map */
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  @apply bg-white text-slate-900 shadow-xl rounded-lg !important;
+}
+.leaflet-popup-content {
+  margin: 1rem !important;
 }
