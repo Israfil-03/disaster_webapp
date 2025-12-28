@@ -1,9 +1,10 @@
 {
   "name": "aadhyapath-server",
   "version": "1.0.0",
+  "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "npx prisma migrate deploy && node prisma/seed.js && node src/index.js",
     "dev": "nodemon src/index.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate deploy",

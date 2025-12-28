@@ -4,6 +4,8 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import authRoutes from './routes/auth.js';
 import alertRoutes from './routes/alerts.js';
 import reportRoutes from './routes/reports.js';
@@ -12,6 +14,9 @@ import resourceRoutes from './routes/resources.js';
 import chatRoutes from './routes/chat.js';
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const httpServer = createServer(app);
@@ -34,6 +39,16 @@ app.use('/api/reports', reportRoutes);
 app.use('/api/volunteers', volunteerRoutes);
 app.use('/api/resources', resourceRoutes);
 app.use('/api/chat', chatRoutes);
+
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  const clientDist = path.join(__dirname, '../../client/dist');
+  app.use(express.static(clientDist));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(clientDist, 'index.html'));
+  });
+}
 
 // Socket.io
 io.on('connection', (socket) => {
